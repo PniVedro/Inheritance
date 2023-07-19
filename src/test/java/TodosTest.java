@@ -17,7 +17,7 @@ public class TodosTest {
     }
 
     @Test
-    public void ShouldReturnEmptyArray() {
+    public void MustFindNoMatch() {
         SimpleTask simpleTask = new SimpleTask(5, "Зайти в магазин");
         Meeting meeting = new Meeting(3, "Важная встреча", "в 10 утра", "Тудус");
         Epic epic = new Epic(2, new String[]{"Хлеб", "Яйка", "Молоко"});
@@ -36,6 +36,14 @@ public class TodosTest {
         Todos todos = new Todos();
         todos.add(simpleTask);
         Task[] expected = {simpleTask};
+        Task[] actual = todos.search("магазин");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void MustFindFromZeroTask() {
+        Todos todos = new Todos();
+        Task[] expected = {};
         Task[] actual = todos.search("магазин");
         Assertions.assertArrayEquals(expected, actual);
     }
